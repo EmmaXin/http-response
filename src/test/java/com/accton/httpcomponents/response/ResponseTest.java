@@ -47,7 +47,7 @@ public class ResponseTest
     }
 
     void checkResponseFormat(ObjectNode response) {
-        assertTrue(response.get("code") != null);
+        assertTrue(response.get("status") != null);
         assertTrue(response.get("data") != null);
         assertTrue((response.get("data").isObject() || response.get("data").isArray()));
     }
@@ -108,7 +108,7 @@ public class ResponseTest
 
         JsonNode respData = response.get("data");
         assertTrue(respData.isObject() == true);
-        assertTrue(respData.equals(data));
+        assertEquals(data, respData);
     }
 
     public void testArrayDataResponse() {
@@ -128,5 +128,6 @@ public class ResponseTest
         JsonNode respData = response.get("data");
         assertTrue(respData.isArray() == true);
         assertTrue(respData.size() == maxCount);
+        assertEquals(data, respData);
     }
 }

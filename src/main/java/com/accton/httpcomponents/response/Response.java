@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class Response {
     public enum StatusCode {
-        SUCCESS(200), BAD_REQUEST(400), UNAUTHORIZED(401);
+        SUCCESS(200), BAD_REQUEST(400), UNAUTHORIZED(401), INTERNAL_SERVER_ERROR(500);
 
         private final int value;
         private StatusCode(int value) {
@@ -31,7 +31,7 @@ public class Response {
         this.code = code;
 
         this.data = JsonNodeFactory.instance.objectNode();
-        ((ObjectNode)this.data).put("messgae", message);
+        ((ObjectNode) this.data).put("message", message);
     }
 
     Response(StatusCode code, JsonNode data) {
@@ -43,8 +43,8 @@ public class Response {
         this.code = code;
 
         this.data = JsonNodeFactory.instance.objectNode();
-        ((ObjectNode)this.data).put("messgae", message);
-        ((ObjectNode)this.data).putArray("errors").addAll(processReportToJsonArray(report));
+        ((ObjectNode) this.data).put("message", message);
+        ((ObjectNode) this.data).putArray("errors").addAll(processReportToJsonArray(report));
     }
 
     public static ArrayNode processReportToJsonArray(ProcessingReport report) {
@@ -61,7 +61,7 @@ public class Response {
 
     public JsonNode toJson() {
         ObjectNode json = JsonNodeFactory.instance.objectNode();
-        json.put("code", code.getValue());
+        json.put("status", code.getValue());
         json.put("data", data);
 
         return json;
