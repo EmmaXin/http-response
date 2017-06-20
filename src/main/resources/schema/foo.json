@@ -1,0 +1,14 @@
+{
+  "title": "Daily Trade Transaction",
+  "description": "Daily Trade Transaction",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
